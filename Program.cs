@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.HttpOverrides;
-
+using Microsoft.EntityFrameworkCore;
+using Inventory.Data;
 
 // for cors
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
@@ -7,6 +8,9 @@ var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlite("Filename=Inventory.db")
+);
 // for cors
 builder.Services.AddCors(options =>
 {
